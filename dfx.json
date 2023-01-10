@@ -1,0 +1,28 @@
+{
+  "canisters": {
+    "vibrantHub_backend": {
+      "main": "src/vibrantHub_backend/main.mo",
+      "type": "motoko"
+    },
+    "vibrantHub_frontend": {
+      "dependencies": [
+        "vibrantHub_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/vibrantHub_frontend/src/index.html"
+      },
+      "source": [
+        "src/vibrantHub_frontend/assets",
+        "dist/vibrantHub_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "version": 1
+}
