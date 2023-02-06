@@ -1,21 +1,18 @@
 {
   "canisters": {
-    "vibrantHub_backend": {
-      "main": "src/vibrantHub_backend/main.mo",
-      "type": "motoko"
-    },
-    "vibrantHub_frontend": {
-      "dependencies": [
-        "vibrantHub_backend"
-      ],
+    "v_hub_fe": {
       "frontend": {
-        "entrypoint": "src/vibrantHub_frontend/src/index.html"
+        "entrypoint": "src/v_hub_fe/src/index.html"
       },
       "source": [
-        "src/vibrantHub_frontend/assets",
-        "dist/vibrantHub_frontend/"
+        "src/v_hub_fe/assets",
+        "dist/v_hub_fe/"
       ],
       "type": "assets"
+    },
+    "v_registry": {
+      "main": "src/v_registry/main.mo",
+      "type": "motoko"
     }
   },
   "defaults": {
