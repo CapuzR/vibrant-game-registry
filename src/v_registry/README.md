@@ -1,7 +1,7 @@
 # Milestones
 
  ~~1. Raw website with the Game Registry.~~
- 2. Backend in Motoko with the Game Registry.
+ ~~2. Backend in Motoko with the Game Registry.~~
  ~~3. Deployment to the internet Computer~~
 
 # ADD
@@ -49,6 +49,7 @@ dfx canister --network ic call v_registry update '( record {
 )'
 ```
 
+```
 dfx canister call v_registry add '( record {
         thumbnail = "https://pbs.twimg.com/profile_images/1540103717311188992/waJsnPbN_400x400.jpg";
         name = "Faefolk";
@@ -89,7 +90,9 @@ dfx canister call v_registry add '( record {
         };
 }
 )'
+```
 
+```
 dfx canister call v_registry add '( record {
         thumbnail = "https://pbs.twimg.com/profile_images/1537681350064578560/ztbtYV6h_400x400.jpg";
         name = "Eimolad";
@@ -130,9 +133,11 @@ dfx canister call v_registry add '( record {
         };
 }
 )'
+```
 
 # Update
 
+```
 dfx canister call v_registry update '( record {
         thumbnail = "https://pbs.twimg.com/profile_images/1540103717311188992/waJsnPbN_400x400.jpg";
         name = "Faefolk";
@@ -173,6 +178,7 @@ dfx canister call v_registry update '( record {
         };
 }
 )'
+```
 
 # GET
 
