@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Grid, Button, Typography, CircularProgress, Backdrop, TextField } from '@mui/material';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import { v_registry }  from '../../../declarations/v_registry';
+import { useNavigate } from "react-router-dom";
 
 import SearchIcon from '@mui/icons-material/Search';
 import LinkIcon from '@mui/icons-material/Link';
@@ -13,6 +14,7 @@ export default function Games() {
   const [ loading, setLoading ] = useState(false);
   const [ gameColls, setGameColls ] = useState([]);
   const [ search, setSearch ] = useState("");
+  const navigate = useNavigate();
 
   const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
     color: "#fff",
@@ -84,9 +86,7 @@ const columns = [
       width: 80,
       renderCell: (params) => {
         return (
-          <>
-            <img src={params.row.avatar} style={{height: "100%"}} />
-          </>
+            <Button onClick={()=>{ navigate(`/registry/${params.row.id}`) }}><img src={params.row.avatar} style={{width: "100%"}} /></Button>
         );
       }
     },
@@ -299,11 +299,6 @@ const columns = [
             </Grid>
           </Grid>
         <Grid container justifyContent="space-between" xs={12} style={{marginTop: "50vh", position: "absolute", bottom: 40, marginLeft: 0, color: "#ffffff", width: "100vw"}}>
-          <Grid item xs={6} textAlign="center" sx={{marginTop:"2vh"}}>
-            <Typography>
-              developed by Sur Labs 2023
-            </Typography>
-          </Grid>
           <Grid item xs={6} textAlign="center">
             <Typography>
               <img src="/powered-by-ic.svg"></img>

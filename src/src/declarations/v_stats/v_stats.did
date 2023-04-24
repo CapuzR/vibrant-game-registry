@@ -1,0 +1,52 @@
+type Value = 
+ variant {
+   Array: vec Value;
+   Blob: blob;
+   Bool: bool;
+   Bytes: vec nat8;
+   Class: vec Property;
+   Float: float64;
+   Int: int;
+   Int16: int16;
+   Int32: int32;
+   Int64: int64;
+   Int8: int8;
+   Nat: nat;
+   Nat16: nat16;
+   Nat32: nat32;
+   Nat64: nat64;
+   Nat8: nat8;
+   Option: opt Value;
+   Principal: principal;
+   Text: text;
+ };
+type Stats = 
+ record {
+   active_players: nat;
+   cycles_burned: nat;
+   extras: opt vec Property;
+   hours_played: nat;
+   peak_concurrent_players: nat;
+   session_time_average: nat;
+   unique_players: nat;
+ };
+type State = record {canister_id: principal;};
+type Property = 
+ record {
+   name: text;
+   value: Value;
+ };
+type Date = text;
+service : {
+  add_game: (State) -> ();
+  get_all_game_stats: () -> (vec Stats);
+  get_all_game_stats_rels: () -> (vec record {
+                                        principal;
+                                        text;
+                                      });
+  get_all_games: () -> (vec State);
+  get_game: (principal) -> (opt State);
+  get_game_stats: (principal) -> (vec Stats);
+  get_game_stats_by_date: (principal, opt Date) -> (vec Stats);
+  init: () -> ();
+}

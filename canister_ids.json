@@ -1,9 +1,19 @@
 {
+  "dummy_game": {
+    "ic": "w32qw-ayaaa-aaaan-qdnpq-cai"
+  },
+  "v_admin": {
+    "ic": "36dg4-eaaaa-aaaan-qdaia-cai",
+    "local": "si2b5-pyaaa-aaaaa-aaaja-cai"
+  },
   "v_hub_fe": {
     "ic": "sxiiz-dqaaa-aaaan-qc4ea-cai"
   },
   "v_registry": {
     "ic": "t2gmx-myaaa-aaaan-qc4dq-cai",
-    "local": "q4eej-kyaaa-aaaaa-aaaha-cai"
+    "local": "ryjl3-tyaaa-aaaaa-aaaba-cai"
+  },
+  "v_stats": {
+    "ic": "w43wc-naaaa-aaaan-qdnpa-cai"
   }
 }

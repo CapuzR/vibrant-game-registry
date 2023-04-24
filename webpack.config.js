@@ -39,6 +39,7 @@ const canisterEnvVariables = initCanisterEnv();
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 const frontendDirectory = "v_hub_fe";
+// const frontendDirectory = "v_admin";
 
 const frontend_entry = path.join("src", frontendDirectory, "src", "index.html");
 
@@ -56,7 +57,8 @@ module.exports = {
     minimizer: [new TerserPlugin()],
   },
   resolve: {
-    extensions: [".js", ".ts", ".jsx", ".tsx"],
+    extensions: [".js", ".ts", ".jsx", ".tsx", ".css"],
+    // modules: ['node_modules'],
     fallback: {
       assert: require.resolve("assert/"),
       buffer: require.resolve("buffer/"),
@@ -64,6 +66,9 @@ module.exports = {
       stream: require.resolve("stream-browserify/"),
       util: require.resolve("util/"),
     },
+    alias: {
+      '@connect2ic': path.resolve(__dirname, 'node_modules/@connect2ic'),
+    }
   },
   output: {
     filename: "index.js",
@@ -78,14 +83,14 @@ module.exports = {
   module: {
    rules: [
      { test: /\.(ts|tsx|jsx)$/, loader: "ts-loader" },
-     { test: /\.css$/, use: ['style-loader','css-loader'] },
+     { test: /\.css$/i, use: ['style-loader','css-loader'] },
      {
       test: /\.(jpe?g|png|gif|svg)$/i, 
       loader: 'file-loader',
       options: {
         name: '/public/icons/[name].[ext]'
       }
-     }
+     },
    ]
   },
   plugins: [

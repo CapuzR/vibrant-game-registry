@@ -1,0 +1,81 @@
+icrc14_get_game_stats
+
+type StatsRequest = variant {
+	#StartDate : Int;
+	#EndDate : Int;
+};
+
+type Stats = record {
+	active_players : Nat;
+	peak_concurrent_players : Nat;
+	hours_played : Nat;
+    extras : Value;
+};
+
+type Property = record {name : text; value : Value};
+
+type Value = variant {
+    Array : vec {Value};
+    Principal : principal;
+    Class : vec {Property};
+    Option : opt Value;
+    Bytes : vec {Nat8};
+
+    Nat : nat;
+    Nat8 : nat8;
+    Nat16 : nat16;
+    Nat32 : nat32;
+    Nat64 : nat64;
+    
+    Int : int;
+    Int8 : int8;
+    Int16 : int16;
+    Int32 : int32;
+    Int64 : int64;
+
+    Blob : blob;
+    Bool : bool;
+    Text : text;
+    Float : float64;
+};
+
+service : {
+    icrc14_get_game_stats: (StatsRequest) -> (Stats);
+}
+
+icrc14_get_gamer_data
+
+type Identity = variant {
+    Principal : principal;
+};
+
+type GamerStatsRequest = variant {
+	StartDate : Int;
+	EndDate : Int;
+};
+
+type GamerStatsResults = variant {
+	Ok : GamerStats;
+	Err : GamerStatsError;	
+};
+
+type GamerStats = record {
+	hours_played : Nat;
+    extras : Value;
+};
+
+type GamerStatsError = {
+	NotAuthorized: record { reason: text };
+};
+
+service : {
+    icrc14_get_gamer_data: (Identity, ?GamerStatsRequest) -> (GamerStatsResults);
+}
+
+Following
+
+There should probably be a standard to manage gamer data authorization and multiple standards to manage genre specific stats.
+
+
+Data Structures
+

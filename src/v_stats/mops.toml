@@ -1,0 +1,3 @@
+[dependencies]
+base = "0.7.6"
+StableTrieMap = "https://github.com/NatLabs/StableTrieMap#master"

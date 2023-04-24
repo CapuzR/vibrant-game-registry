@@ -2,6 +2,8 @@ import Principal "mo:base/Principal";
 import Result "mo:base/Result";
 import Trie "mo:base/Trie";
 import Iter "mo:base/Iter";
+import Buffer "mo:base/Buffer";
+import Debug "mo:base/Debug";
 import Types "./types";
 
 actor {
@@ -10,7 +12,7 @@ actor {
 
     stable var games : Trie.Trie<Principal, Metadata> = Trie.empty();
     stable var registryName : Text = "Game registry";
-    stable var admins = ["ircn7-g7maa-v2zab-fgz7m-ofkss-eeskj-msyir-alras-riu7w-k5wrm-xqe"]; 
+    stable var admins : [Principal] = [Principal.fromText("o3xbh-vnkf7-xmqu3-4frbo-qfgxj-xxszb-ddw7l-jpn5w-fmch2-ogv5f-hqe"), Principal.fromText("ircn7-g7maa-v2zab-fgz7m-ofkss-eeskj-msyir-alras-riu7w-k5wrm-xqe")]; 
 
     public query func name() : async Text {
         return registryName;
@@ -26,8 +28,7 @@ actor {
         
     };
 
-    public query func getAll() : async [(Principal,Metadata)] {
-
+    public shared({ caller }) func getAll() : async [(Principal,Metadata)] {
         if (Trie.size(games) == 0) {
             return [];
         };
@@ -37,7 +38,7 @@ actor {
 
     public shared({caller}) func add(metadata : Metadata) : async Result.Result<(), Error> {
 
-        if(Principal.notEqual(caller, Principal.fromText(admins[0]))) {
+        if(not isAdmin(caller, admins)) {
             return #err(#NotAuthorized);
         };
 
@@ -63,7 +64,7 @@ actor {
 
     public shared({caller}) func update(metadata : Metadata) : async Result.Result<(), Error> {
 
-        if(Principal.notEqual(caller, Principal.fromText(admins[0]))) {
+        if(not isAdmin(caller, admins)) {
             return #err(#NotAuthorized);
         };
 
@@ -89,7 +90,7 @@ actor {
 
     public shared({caller}) func remove(principal: Principal) : async Result.Result<(), Error> {
 
-        if(Principal.notEqual(caller, Principal.fromText(admins[0]))) {
+        if(not isAdmin(caller, admins)) {
             return #err(#NotAuthorized);
         };
 
@@ -114,6 +115,45 @@ actor {
                 #ok(());
             };
         };
+    };
+    
+    public query ({ caller }) func getAdmins() : async Result.Result<[Principal], Error> {
+
+        if (not isAdmin(caller, admins)) {
+            return #err(#NotAuthorized);
+        };
+
+        return #ok(admins);
+
+    };
+    
+    public shared ({ caller }) func addNewAdmin(principals : [Principal]) : async Result.Result<(), Error> {
+
+        if (not isAdmin(caller, admins)) {
+        return #err(#NotAuthorized);
+        };
+
+        let adminsBuff : Buffer.Buffer<Principal> = Buffer.Buffer(0);
+
+        for (admin in admins.vals()) {
+        adminsBuff.add(admin);
+        };
+
+        for (principal in principals.vals()) {
+        adminsBuff.add(principal);
+        };
+
+        admins := Buffer.toArray(adminsBuff);
+        return #ok(());
+
+    };
+
+    private func isAdmin(p : Principal, admins : [Principal]) : Bool {
+
+        for (admin in admins.vals()) {
+            if (Principal.equal(admin, p)) return true;
+        };
+        false;
     };
 
     private func key(x : Principal) : Trie.Key<Principal> {

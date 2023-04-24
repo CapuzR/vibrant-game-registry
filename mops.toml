@@ -1,0 +1,5 @@
+[dependencies]
+base = "0.7.6"
+StableTrieMap = "https://github.com/NatLabs/StableTrieMap#master"
+"uuid.mo" = "https://github.com/aviate-labs/uuid.mo#master"
+motoko-datetime = "https://github.com/ByronBecker/motoko-datetime#master"

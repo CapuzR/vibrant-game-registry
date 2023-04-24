@@ -10,7 +10,7 @@
 dfx canister --network ic call v_registry update '( record {
         thumbnail = "https://pbs.twimg.com/profile_images/1451280165464645638/PXa4IWA0_400x400.jpg";
         name = "Plethora";
-        frontend = null;
+        frontend = null; 
         description = "Plethora";
         principal_id = principal "wrcb3-5qaaa-aaaal-qaahq-cai";
         details = vec {
@@ -55,7 +55,7 @@ dfx canister call v_registry add '( record {
         name = "Faefolk";
         frontend = null;
         description = "FaeFolk Game";
-        principal_id = principal "v6c7k-xaaaa-aaaag-qaxfa-cai";
+        principal_id = principal "wckdt-raaaa-aaaaa-aaatq-cai";
         details = vec {
                 record {
                         "Twitter";
